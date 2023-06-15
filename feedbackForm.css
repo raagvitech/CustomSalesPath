@@ -1,0 +1,16 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+.slds-align_absolute-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 500px;
+}
+lightning-card {
+    width: 100%;
+    max-width: none;
+    height: 500px;
+}

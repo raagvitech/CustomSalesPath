@@ -1,0 +1,25 @@
+.slds-button-group:last-child {
+    float: right;
+}
+
+.padding{
+    padding-top: 10px;
+}
+.lightning-accordion-section{
+        font-weight: bold;
+        text-decoration: underline;
+     
+}
+.slds-accordion__summary-content{
+    font-weight: bold!important;
+    /* font-family: 'Times New Roman', Times, serif; */
+
+}
+.container {
+    position: absolute;
+    width: 100%;   
+}
+
+/* :host([data-page-name="filePreview"]) .slds-align--absolute-center  {
+   display: none;
+} */

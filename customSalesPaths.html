@@ -1,0 +1,122 @@
+<template>
+    <div align="center">
+        <lightning-card class="slds-size_1-of-1 slds-card_medium">
+            <div class="slds-path">
+                <div class="slds-grid slds-path__track">
+                    <div class="slds-grid slds-path__scroller-container">
+                        <div class="slds-path__scroller">
+                            <div class="slds-path__scroller_inner">
+                                <ul class="slds-path__nav" role="listbox" aria-orientation="horizontal">
+                                    <li class="slds-path__item slds-is-active start-step" role="presentation">
+                                        <a class="slds-path__link" href="javascript:void(0);" aria-selected="true" tabindex="0" role="option">
+                                          <span class="slds-path__title">Start</span>
+                                        </a>
+                                    </li>
+
+                                    <li class="slds-path__item slds-is-incomplete verification-step" role="presentation">
+                                        <a class="slds-path__link" href="javascript:void(0);" aria-selected="true" tabindex="0" role="option">
+                                          <span class="slds-path__title">Verification</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="slds-path__item slds-is-incomplete tutorial-step" role="presentation">
+                                        <a class="slds-path__link" href="javascript:void(0);" aria-selected="true" tabindex="0" role="option" onclick={handleTutorailClick}>
+                                          <span class="slds-path__title">Tutorial</span>
+                                        </a>
+                                    </li>
+
+                                    <li class="slds-path__item slds-is-incomplete download-step" role="presentation">
+                                        <a class="slds-path__link" href="javascript:void(0);" aria-selected="true" tabindex="0" role="option" onclick={handleDownloadClick}>
+                                          <span class="slds-path__title">Download</span>
+                                        </a>
+                                    </li>
+
+                                    <li class="slds-path__item slds-is-incomplete feedback-step" role="presentation">
+                                        <a class="slds-path__link" href="javascript:void(0);" aria-selected="true" tabindex="0" role="option" onclick={handleFeedBAckClick}>
+                                          <span class="slds-path__title">Feedback</span>
+                                        </a>
+                                    </li>
+                                      
+                                    <li class="slds-path__item slds-is-incomplete help-step" role="presentation">
+                                        <a class="slds-path__link" href="javascript:void(0);" aria-selected="true" tabindex="0" role="option" id="help-anchor" onclick={handleHelpClick}>
+                                          <span class="slds-path__title">Help</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <template if:false={register}>
+                <div align="center"> 
+                    <lightning-button variant="brand"
+                        label="Register"
+                        title="Open Modal"
+                        onclick={customShowModalPopup}
+                        class="my-icon">
+                    </lightning-button>
+    
+                    <template if:true={customFormModal}>
+                        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                            <div class="slds-modal__container">
+                                <!-- modal header start -->
+                                <header class="slds-modal__header">
+                                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={customHideModalPopup}>
+                                        <lightning-icon 
+                                            icon-name="utility:close"
+                                            alternative-text="close"
+                                            variant="brand"
+                                            size="small" >
+                                        </lightning-icon>
+                                        <span class="slds-assistive-text">Close</span>
+                                    </button>
+                                    <h2 class="slds-text-heading_medium slds-hyphenate">Register</h2>
+                                </header>
+                                <!-- modal body start -->
+                                <div class="slds-modal__content slds-p-around_medium">
+                                    <div class="slds-col slds-size_12-of-12 slds-p-horizontal--medium slds-m-bottom_medium">
+                                        <lightning-flow
+                                            flow-api-name='Register_Flow'
+                                            onstatuschange={handleStatusChange}>
+                                        </lightning-flow> 
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </template>
+                </div> 
+            </template>
+            <template if:true={verifyOtp}>
+                <c-otp-Verification ondemoevent={handleNext}></c-otp-Verification>
+            </template>
+            <template if:true={tutorialPage}>
+                <c-documents-files-display-component ondataevent={handleDataEvent}></c-documents-files-display-component>
+            </template>
+            <template if:true={showDownload}>
+                <div style="font-weight: normal;">
+                    <template for:each={uniqueTitles} for:item="titleObj">
+                        <div key={titleObj.id} class="slds-grid" >
+                            <div class="title">{titleObj.title}</div>  <hr>
+                            <div class="button" style="padding-right: 91px;">
+                                <lightning-button variant="base"
+                                    label="Download"
+                                    onclick={downloadFile}
+                                    value={titleObj.id}
+                                    data-id={titleObj.id}>
+                                </lightning-button>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </template>
+            <template if:true={feedbackComponent}>
+                <c-feedback-form onfeedbackevent={handleFeedtoHelp}></c-feedback-form>
+            </template>
+            <template if:true={helpComment}>
+                <c-help-component-batch-apex onhelpevent={handleHelpComment}></c-help-component-batch-apex>
+            </template>
+        </lightning-card>  
+    </div>
+</template>

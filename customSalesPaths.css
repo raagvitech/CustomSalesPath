@@ -1,0 +1,56 @@
+.slds-modal__content{
+    width: 500px;
+}
+.slds-modal__header{
+    width: 500px;
+}
+.slds-path__item.slds-is-completed {
+    background-color: #4caf50; 
+}
+.slds-card{
+    max-height: fit-content;
+    max-width: 200%;
+}
+.box-tag{
+    max-height: fit-content;    
+
+}
+.slds-size_1-of-1{
+    max-height: fit-content;
+}
+
+.spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.spinner-container .slds-spinner {
+    margin: 0 auto;
+}
+.slds-path__item.slds-is-completed {
+    background-color: #4CAF50;
+}
+.slds-card{
+    max-height: fit-content;
+    max-width: 200%;
+}
+.box-tag{
+    max-height: fit-content;
+}
+.slds-size_1-of-1{
+    max-height: fit-content;
+}
+.slds-grid{
+    display: flex;
+    justify-content: space-between;
+}
+.title {
+    font-weight: bold;
+    font-size: 17px;
+    margin-left: 30px;
+}
+.button {
+    font-weight: bold;
+    font-size: 17px;
+}

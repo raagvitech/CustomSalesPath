@@ -1,0 +1,45 @@
+<template>
+    <lightning-button 
+        variant="Brand" 
+        label="Verify"
+        title="Open popup" 
+        onclick={showModalBox}>
+    </lightning-button>
+
+    <!-- modal start -->      
+    <template if:true={isShowModal}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- modal header start -->
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={hideModalBox}>
+                        <lightning-icon icon-name="utility:close"
+                            alternative-text="close"
+                            variant="inverse"
+                            size="small">
+                        </lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                </header>
+        
+                <!-- modal body start -->
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <div align="center">
+                        <div class="slds-var-m-around_medium">
+                            <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">OTP Verification</h2>
+                            <div style="padding: 10px">
+                                <lightning-input type="text" placeholder="Enter verification code" value={otp} onchange={handleOtpChange}></lightning-input>
+                                <template if:true={textMessageTrue}>
+                                    <p style="color: red;">Please enter valid OTP</p>
+                                </template><br/>
+                                <lightning-button variant="Brand" label="Submit" onclick={handleVerify}></lightning-button>   
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+</template>

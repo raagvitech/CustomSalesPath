@@ -1,0 +1,111 @@
+<template>
+  <lightning-card>
+    <lightning-accordion active-section-name="JavaScript" allow-multiple-sections-open="true">
+          <template for:each={data} for:item="item" for:index="index">
+              <lightning-accordion-section name="JavaScript" class="slds-accordion__summary-heading" style="font-weight: bold;" key={item.id} label={item.workspaceName}>
+                <div style="text-align: -webkit-left;
+                           font-weight: normal">
+                  <p>{item.paragraph}</p>
+                 
+                  </div>
+                  <template for:each={item.documents} for:item="doc">
+                    <div key={doc.Id}><hr>
+                      <div align="left">
+                        <div class="unbold" style="font-weight: normal;">
+                          <lightning-button label={doc.title} 
+                            variant="base"
+                            data-id={doc.id}
+                            onclick={previewHandler}
+                          ></lightning-button>
+                          <lightning-layout-item size="4" flexibility="auto" padding="horizontal-small" class="slds-float_right" style="text-align: -webkit-right;">
+                            <lightning-button variant="base"
+                                              label="Take a test"
+                                              onclick={customShowModalPopup}
+                                              value={item.workspaceName}
+                                              data-id={doc.id}>
+                            </lightning-button>
+                          </lightning-layout-item>
+                        </div>
+                      </div>
+                    </div>
+                  </template>                  
+                  <template if:true={customFormModal}>
+                      <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                        <div class="slds-modal__container">
+                          <!-- modal header start -->
+                          <header class="slds-modal__header">
+                            <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={customHideModalPopup}>
+                              <lightning-icon icon-name="utility:close" alternative-text="close" variant="Neutral" size="small"></lightning-icon>
+                              <span class="slds-assistive-text">Close</span>
+                            </button>
+                            <h2 class="slds-text-heading_medium slds-hyphenate">Multiple choice questions</h2>
+                          </header>
+                          <div class="container-fluid">                                        
+                            <div class="slds-modal__content slds-p-around_medium">
+                              <div class="padding" style="font-weight: normal;">
+                                <div align="left">
+                                  <div class="unbold">
+                                  <template if:true={salesforceQuestions}>
+                                  <template for:each={questions} for:item="q">                                         
+                                      <h3 key={q.question}>{q.question}<br></h3>
+                                       <template for:each={q.options} for:item="o">
+                                         <div key={o}>
+                                           <input type="radio" id={o} name={q.question} value={o} onchange={handleChange}>
+                                           <label for={o}>{o}</label>
+                                         </div>               
+                                       </template>
+                                     </template>
+                                  </template>
+                                  <template if:true={JavaQuestionsList}>
+                                      <template for:each={javaQuestions} for:item="q">
+                                          <h3 key={q.question}>{q.question}</h3>
+                                          <template for:each={q.options} for:item="o">
+                                            <div key={o}>
+                                              <input type="radio" id={o} name={q.question} value={o} onchange={handleChange}>
+                                              <label for={o}>{o}</label>
+                                            </div>
+                                          </template>
+                                        </template>
+                                  </template>
+                                  <template if:true={javaScriptQuestionsList}>
+                                    <template for:each={javaScriptQuestions} for:item="q">
+                                        <h3 key={q.question}>{q.question}</h3>
+                                        <template for:each={q.options} for:item="o">
+                                          <div key={o}>
+                                            <input type="radio" id={o} name={q.question} value={o} onchange={handleChange}>
+                                            <label for={o}>{o}</label>
+                                          </div>
+                                        </template>
+                                      </template>
+                                </template>
+                                <template if:true={muleSoftQuestionsList}>
+                                  <template for:each={muleSoftQuestions} for:item="q">
+                                      <h3 key={q.question}>{q.question}</h3>
+                                      <template for:each={q.options} for:item="o">
+                                        <div key={o}>
+                                          <input type="radio" id={o} name={q.question} value={o} onchange={handleChange}>
+                                          <label for={o}>{o}</label>
+                                        </div>
+                                      </template>
+                                    </template>
+                              </template>
+                              </div>
+                            </div>
+                            </div>
+                            </div>
+                          </div>
+                          <footer class="slds-modal__footer">
+                            <button class="slds-button slds-button_neutral" onclick={customHideModalPopup} title="Cancel">Cancel</button>
+                            <button type="submit" class="slds-button slds-button_neutral" onclick={handelOnClick} title="Submit">Submit</button>
+                          </footer>
+                        </div>
+                      </section>
+                      <div class="slds-backdrop slds-backdrop_open"></div>
+                  
+                    </template>
+              </lightning-accordion-section>
+          </template>
+      </lightning-accordion>
+  </lightning-card>
+  <!---/Accordion-->
+</template>
